@@ -2,13 +2,16 @@ const express = require('express');
 const fs = require('fs').promises;
 const path = require('path');
 
-var router = express.Router();
+const router = express.Router();
 
-router.get('/talker', async (req, res) => {
+router.get('/', async (req, res) => {
   const pathTalker = path.join(__dirname, '../talker.json');
   const data = await fs.readFile(pathTalker);
   const response = JSON.parse(data);
-  res.status(200).json(response);
-})
+  if(response.length !== 0) {
+    res.status(200).json(response);
+  }
+  res.status(200).json([]);
+});
 
 module.exports = router;
