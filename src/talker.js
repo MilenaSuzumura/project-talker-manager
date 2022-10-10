@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
   const pathTalker = path.join(__dirname, '../talker.json');
   const data = await fs.readFile(pathTalker);
   const response = JSON.parse(data);
-  if(response.length !== 0) {
+  if (response.length !== 0) {
     res.status(200).json(response);
   }
   res.status(200).json([]);
