@@ -16,5 +16,9 @@ app.listen(PORT, () => {
   console.log('Online');
 });
 
+// Requisito 1
+const talker = require('./talker.js');
 
-// Primeiro commit
+app.use(express.json());
+
+app.use('/talker', talker);
