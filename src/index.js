@@ -17,15 +17,15 @@ app.listen(PORT, () => {
 });
 
 // Requisito 1
-const talkerRoute = require('./talkerRoute.js');
+const talkerRouter = require('./talkerRouter.js');
 
 app.use(express.json());
 
-app.use('/talker', async (_req, res) => {
-const response = await talkerRoute();
-  if (response.length === 0) {
-    res.status(200).json([]);
-  } else {
-    res.status(200).json(response);
-  }
-});
+app.use('/talker', talkerRouter);
+
+// Requisito 3
+const loginRouter = require('./loginRouter');
+
+app.use(express.json());
+
+app.use('/login', loginRouter);
