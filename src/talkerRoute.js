@@ -8,10 +8,10 @@ const pathTalker = join(__dirname, '../talker.json');
 router.get('/', async (_req, res) => {
   const data = await fs.readFile(pathTalker);
   const response = await JSON.parse(data);
-  if (response.length > 0) {
-    res.status(200).json(response);
-  } else {
+  if (response.length === 0) {
     res.status(200).json([]);
+  } else {
+    res.status(200).json(response);
   }
 });
 
