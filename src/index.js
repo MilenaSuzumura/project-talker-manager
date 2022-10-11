@@ -21,4 +21,11 @@ const talkerRoute = require('./talkerRoute.js');
 
 app.use(express.json());
 
-app.use('/talker', talkerRoute);
+app.use('/talker', async (_req, res) => {
+const response = await talkerRoute();
+  if (response.length === 0) {
+    res.status(200).json([]);
+  } else {
+    res.status(200).json(response);
+  }
+});
