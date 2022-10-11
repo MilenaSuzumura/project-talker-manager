@@ -3,20 +3,17 @@ const express = require('express');
 const router = express.Router();
 
 const geradorToken = require('./geradorToken.js');
-const validator = require('./validator');
+const { validator } = require('./validator');
 
-router.post('/', async (req, res) => {
+router.get('/', async (req, res) => {
   const token = geradorToken();
-/*   const { email, password } = req.body;
-  const result = { ...req.body, email, password, token }; */
+   const { email, password } = req.body;
+  const validateEmail = Object.values(validator(email)).length;
+  const validatePassword = Object.values(validator(password)).length;
+  if (validateEmail === 0 || validatePassword === 0) {
+    res.status(400).json({ message: '"Email" e "Senha" são campos obrigatórios' });
+  }
   res.status(200).json({ token });
-/*   const validateEmail = validator(email);
-  const validatePassword = validator(password);
-  if (validateEmail) {
-    res.status(400).json({ message: 'Adicione um "email"' });
-  } else if (validatePassword) {
-    res.status(400).json({ message: 'Adicione uma "senha"' });
-  } */
 });
 
   module.exports = router;
