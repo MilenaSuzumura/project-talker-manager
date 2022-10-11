@@ -2,15 +2,21 @@ const express = require('express');
 
 const router = express.Router();
 
-const responseTalker = require('./responseTalker.js');
+const geradorToken = require('./geradorToken.js');
+const validator = require('./validator');
 
-router.get('/', async (_req, res) => {
-  const response = await responseTalker();
-    if (response.length === 0) {
-      res.status(200).json([]);
-    } else {
-      res.status(200).json(response);
-    }
-  });
+router.post('/', async (req, res) => {
+  const token = geradorToken();
+/*   const { email, password } = req.body;
+  const result = { ...req.body, email, password, token }; */
+  res.status(200).json({ token });
+/*   const validateEmail = validator(email);
+  const validatePassword = validator(password);
+  if (validateEmail) {
+    res.status(400).json({ message: 'Adicione um "email"' });
+  } else if (validatePassword) {
+    res.status(400).json({ message: 'Adicione uma "senha"' });
+  } */
+});
 
   module.exports = router;
