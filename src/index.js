@@ -17,8 +17,8 @@ app.listen(PORT, () => {
 });
 
 // Requisito 1
-const talker = require('./talker.js');
+const talkerRoute = require('./talkerRoute.js');
 
-app.use(express.json());
+app.use(express.json(talkerRoute));
 
-app.use('/talker', talker);
+app.use('/talker', talkerRoute);
