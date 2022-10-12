@@ -36,12 +36,8 @@ const {
     validaAutorizacao,
 } = require('./validator');
 
-const itens = [
-  validaAutorizacao,
-  validaName, validaIdade, validaTalk, validaRate, validaWatchedAt,
-];
-
-router.post('/', ...itens, async (req, res) => {
+router.post('/', validaAutorizacao,
+validaName, validaIdade, validaTalk, validaRate, validaWatchedAt, async (req, res) => {
   const response = await responseTalker();
   const user = { ...req.body, id: (response.length + 1) };
   response.push(user);
@@ -49,7 +45,8 @@ router.post('/', ...itens, async (req, res) => {
   res.status(201).json(user);
 });
 
-router.put('/:id', ...itens, async (req, res) => {
+router.put('/:id', validaAutorizacao,
+validaName, validaIdade, validaTalk, validaRate, validaWatchedAt, async (req, res) => {
   const { id } = req.params;
   const response = await responseTalker();
   const index = response.findIndex((item) => item.id === parseInt(id, 10));
