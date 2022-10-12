@@ -56,9 +56,14 @@ validaName, validaIdade, validaTalk, validaRate, validaWatchedAt, async (req, re
   res.status(200).json(response[index]);
 });
 
-/* router.delete('/:id', ...itens, async (req, res) => {
+router.delete('/:id', validaAutorizacao, async (req, res) => {
   const { id } = req.params;
-    const [result] = await peopleDB.remove(id);
-}); */
+  const response = await responseTalker();
+  const index = response.findIndex((item) => item.id === parseInt(id, 10));
+  const result = response.indexOf(index);
+  response.splice(result, 1);
+  await fs.writeFile(pathTalker, JSON.stringify(response));
+  res.status(204).json(response);
+});
 
 module.exports = router;
