@@ -59,4 +59,9 @@ router.put('/:id', ...itens, async (req, res) => {
   res.status(200).json(response[index]);
 });
 
+/* router.delete('/:id', ...itens, async (req, res) => {
+  const { id } = req.params;
+    const [result] = await peopleDB.remove(id);
+}); */
+
 module.exports = router;
