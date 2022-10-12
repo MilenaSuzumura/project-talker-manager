@@ -64,7 +64,7 @@ const validaRate = (req, res, next) => {
   if (rate === undefined) {
     return res.status(400).json({ message: 'O campo "rate" é obrigatório' });
   }
-  if (parseInt(rate, 10) > 5 || parseInt(rate, 10) < 0) {
+  if (parseInt(rate, 10) > 5 || parseInt(rate, 10) < 1) {
     return res.status(400).json({ message: 'O campo "rate" deve ser um inteiro de 1 à 5' });
   }
   next();
