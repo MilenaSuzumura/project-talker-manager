@@ -27,4 +27,24 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// Requisito 5
+/* const pathTalker = join(__dirname, 'talker.json');
+const talkerValidator = require('./talkerValidator');
+
+router.post('/', talkerValidator, async (req, res) => {
+  const users = req.body;
+  const response = await responseTalker();
+  response.push(users);
+  await fs.writeFile(pathTalker, JSON.stringify(response));
+  res.status(201).json(users);
+}); */
+
+const {
+  validaName, validaIdade, validaTalk, validaRate, validaWatchedAt, validaAutorizacao,
+} = require('./validator');
+const adicionaUser = require('./adicionaUser');
+
+router.post('/', validaAutorizacao,
+validaName, validaIdade, validaTalk, validaRate, validaWatchedAt, adicionaUser);
+
 module.exports = router;
