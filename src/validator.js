@@ -3,7 +3,7 @@ const validaSenha = (req, res, next) => {
   if (password === undefined) {
     res.status(400).json({ message: 'O campo "password" é obrigatório' });
   }  
-  if (password.length < 6) {
+  if (password !== undefined && password.length < 6) {
     res.status(400).json({ message: 'O "password" deve ter pelo menos 6 caracteres' });
   }
   next();
@@ -14,13 +14,10 @@ const validaEmail = (req, res, next) => {
   if (email === undefined) {
     return res.status(400).json({ message: 'O campo "email" é obrigatório' });
   }
-  if (!email.includes('@') || !email.endsWith('.com')) {
+  if (email !== undefined && (!email.includes('@') || !email.endsWith('.com'))) {
     return res.status(400).json({ message: 'O "email" deve ter o formato "email@email.com"' });
   }
   next();
 };
 
-module.exports = { 
-  validaSenha,
-  validaEmail,
-};
+module.exports = { validaSenha, validaEmail };
