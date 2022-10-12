@@ -36,7 +36,7 @@ app.use('/login', loginRouter);
 const {
   validaName, validaIdade, validaTalk, validaRate, validaWatchedAt,
   validaAutorizacao,
-} = require('./validator');
+} = require('./talkerAvaliador');
 const responseTalker = require('./responseTalker.js');
 
 const pathTalker = join(__dirname, 'talker.json');
