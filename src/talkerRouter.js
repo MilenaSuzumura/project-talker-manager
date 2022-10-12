@@ -1,8 +1,4 @@
 const express = require('express');
-const { join } = require('path');
-const fs = require('fs').promises;
-
-const pathTalker = join(__dirname, 'talker.json');
 
 const router = express.Router();
 
@@ -29,31 +25,6 @@ router.get('/:id', async (req, res) => {
   } else {
     res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
   }
-});
-
-const {
-    validaName, validaIdade, validaTalk, validaRate, validaWatchedAt,
-    validaAutorizacao,
-} = require('./validator');
-
-router.post('/', validaAutorizacao,
-validaName, validaIdade, validaTalk, validaRate, validaWatchedAt, async (req, res) => {
-  const response = await responseTalker();
-  const user = { ...req.body, id: (response.length + 1) };
-  response.push(user);
-  await fs.writeFile(pathTalker, JSON.stringify(response));
-  res.status(201).json(user);
-});
-
-router.put('/:id', validaAutorizacao,
-validaName, validaIdade, validaTalk, validaRate, validaWatchedAt, async (req, res) => {
-  const { id } = req.params;
-  const response = await responseTalker();
-  const index = response.findIndex((item) => item.id === parseInt(id, 10));
-  const editUser = { ...req.body };
-  response[index] = { ...editUser, id: response[index].id };
-  await fs.writeFile(pathTalker, JSON.stringify(response));
-  res.status(200).json(response[index]);
 });
 
 /* router.delete('/:id', ...itens, async (req, res) => {
