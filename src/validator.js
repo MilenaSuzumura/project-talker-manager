@@ -47,7 +47,10 @@ const validaWatchedAt = (req, res, next) => {
   if (watchedAt === undefined) {
     return res.status(400).json({ message: 'O campo "watchedAt" é obrigatório' });
   }
-  if (!(watchedAt instanceof Date)) {
+
+  // Referencia: https://www.guj.com.br/t/resolvido-como-validar-data-com-java-script/276656/2
+  const validadorDeData = /^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/;
+  if (!validadorDeData.test(watchedAt)) {
     return res.status(400).json({ 
       message:
       'O campo "watchedAt" deve ter o formato "dd/mm/aaaa"' });
@@ -77,10 +80,10 @@ const validaTalk = (req, res, next) => {
 
 const validaAutorizacao = (req, res, next) => {
   const { authorization } = req.headers;
-  if (authorization === undefined || authorization.length <= 0) {
+  if (!authorization) {
     return res.status(401).json({ message: 'Token não encontrado' });
   }
-  if (authorization.length !== 16) {
+  if (authorization.length < 16) {
     return res.status(401).json({
        message: 'Token inválido',
     });

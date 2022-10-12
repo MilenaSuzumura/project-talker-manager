@@ -1,4 +1,8 @@
 const express = require('express');
+const { join } = require('path');
+const fs = require('fs').promises;
+
+const pathTalker = join(__dirname, 'talker.json');
 
 const router = express.Router();
 
@@ -40,11 +44,21 @@ router.post('/', talkerValidator, async (req, res) => {
 }); */
 
 const {
-  validaName, validaIdade, validaTalk, validaRate, validaWatchedAt, validaAutorizacao,
+    validaName, validaIdade, validaTalk, validaRate, validaWatchedAt,
+    validaAutorizacao,
 } = require('./validator');
-const adicionaUser = require('./adicionaUser');
 
-router.post('/', validaAutorizacao,
-validaName, validaIdade, validaTalk, validaRate, validaWatchedAt, adicionaUser);
+const itens = [
+  validaAutorizacao,
+  validaName, validaIdade, validaTalk, validaRate, validaWatchedAt,
+];
+
+router.post('/', ...itens, async (req, res) => {
+  const response = await responseTalker();
+  const user = { ...req.body, id: (response.length + 1) };
+  response.push(user);
+  await fs.writeFile(pathTalker, JSON.stringify(response));
+  res.status(201).json(user);
+});
 
 module.exports = router;
