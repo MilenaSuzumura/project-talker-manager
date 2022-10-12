@@ -10,4 +10,4 @@ router.post('/', validaEmail, validaSenha, async (_req, res) => {
   res.status(200).json({ token });
 });
 
-  module.exports = router;
+module.exports = router;
