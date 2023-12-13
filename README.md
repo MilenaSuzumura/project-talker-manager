@@ -46,72 +46,49 @@ Existem um cenário onde a saída acima pode não ser retornada: caso não exist
 
 </details>
 
-
-<!--
 <details>
-<summary>Endpoint POST /login</summary><br />
-Utilizado para quando o usuário vai acessar sua conta. O banco de dados exige que o usuário insira o email e senha correta e irá retornar um token temporário como confirmação de que está correto.
-
-##### Exemplo de entrada:
-<img alt="imagem-exemplo-de-entrada-correta-post-login" src="/images-readme/post-login-exemplo-de-entrada.png">
-
-##### Exemplo de saída:
-<img alt="imagem-exemplo-de-saída-correta-post-login" src="/images-readme/post-login-exemplo-de-saida.png">
-
-#### Inserindo informações incorretas
-Existem dois cenários onde a saída acima pode não ser retornada: caso o email ou/e senha estejam incorretas e caso falte uma das duas informações. Ambas possuem retornos diferentes.
-
-<strong>Retorno para email ou/e senha incorretas:</strong>
-```
-{
-  "message": "Invalid fields"
-}
-```
-
-<strong>Retorno para caso falte alguma das duas informações:</strong>
-```
-{
-  "message": "Some required fields are missing"
-}
-```
-
-</details>
-
-<details>
-<summary>Endpoint POST /user</summary><br />
-Utilizado para criar um novo usuário. Para isso, necessita de um nome, email, senha e uma imagem. Assim como o login, retornará um token caso todas as informações enviadas foram validadas corretamente.
+<summary>Endpoint POST /talker</summary><br />
+Utilizado para criar um novo palestrante. Para isso, necessita de um nome, idade, o dia que fez a palestra e avaliação.
 
 ##### Informações necessárias:
-* <strong>displayName:</strong> É o nome e sobrenome. Deve ser enviado como string e o mínimo de caracters é 8. É obrigatório.
-* <strong>email:</strong> É o email e deve ser enviado como string. É obrigatório.
-* <strong>password:</strong> É a senha. Deve ser enviado como string e deve conter no mínimo 6 caracter. É obrigatório.
-* <strong>image:</strong> É uma imagem ou foto de usuário e deve ser enviado como string. Esse é o único que não é obrigatório. 
+* <strong>name:</strong> É o nome e sobrenome. Deve ser enviado como string e o mínimo de caracters é 3. É obrigatório.
+* <strong>age:</strong> É a idade do palestrante. Deve ser enviado como int e o palestrante precisa ter, no mínimo, 18 anos. É obrigatório.
+* <strong>talk:</strong> É um objeto com informações da palestra. Dentro dele, deve conter o dia assistido e a avaliação. É obrigatório.
+* <strong>watchedAt:</strong> É o dia em que foi assistido a palestra. Essa informação deve estar no objeto talk e deve ser enviado como string contendo a data completa em formato dia/mês/ano. É obrigatório. 
+* <strong>rate:</strong> É a avaliação da palestra. Essa informação deve estar no objeto talk e deve ser enviado como int. É obrigatório. 
 
 ##### Exemplo de entrada:
-<img alt="imagem-exemplo-de-entrada-correta-post-user" src="/images-readme/post-user-exemplo-de-entrada.png">
+<img alt="imagem-exemplo-entrada-correta-post-talker" src="/images-readme/post-talker-entrada-exemplo.png">
 
 ##### Exemplo de saída:
-<img alt="imagem-exemplo-de-saída-correta-post-user" src="/images-readme/post-login-exemplo-de-saida.png">
+<img alt="imagem-exemplo-saída-correta-post-talker" src="/images-readme/post-talker-saida-exemplo.png">
 
 #### Inserindo informações incorretas
 Existem dois cenários onde a saída acima pode não ser retornada: caso não preencha os requisitos necessários(explicados nas Informações Necessárias acima) e caso falte alguma das informações obrigatórias. Cada um deles terá uma mensagem diferente avisando o motivo de estar incorreta.
 
-<strong>Exemplo caso não preencha os requisitos necessários:</strong>
+<strong>Exemplos caso não preencha os requisitos necessários:</strong>
 ```
 {
-  "message": "\"password\" length must be at least 6 characters long"
+  "message": "A pessoa palestrante deve ser maior de idade"
+}
+```
+
+```
+{
+  "message": "O \"name\" deve ter pelo menos 3 caracteres"
 }
 ```
 
 <strong>Exemplo caso esteja faltando alguma das informações obrigatórias</strong>
 ```
 {
-  "message": "\"password\" is required"
+  "message": "O campo \"age\" é obrigatório"
 }
 ```
 
 </details>
 
+<!--
 <details>
 <summary>Endpoint POST /categories</summary><br />
 Utilizado para criar uma nova categoria. Para isso, necessita de um nome e de um token valido. Caso as informações estejam corretas, retornara as informações da nova categoria.
