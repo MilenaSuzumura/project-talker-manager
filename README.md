@@ -14,7 +14,7 @@ Talker Manager é um projeto focado em desenvolver uma API de cadastro e pesquis
 
 <details>
 <summary>Endpoint GET /talker</summary><br />
-Utilizado para retornar todos os talkers existentes no banco de dados.
+Utilizado para retornar todos os palestrantes existentes no banco de dados.
 
 ##### Exemplo de entrada:
 <img alt="imagem-exemplo-entrada-get-talker" src="/images-readme/get-talker-entrada-exemplo.png">
@@ -23,6 +23,29 @@ Utilizado para retornar todos os talkers existentes no banco de dados.
 <img alt="imagem-exemplo-saida-get-talker" src="/images-readme/get-talker-saida-exemplo.png">
 
 </details>
+
+<details>
+<summary>Endpoint GET /talker/:id</summary><br />
+Utilizado para retornar o palestrante com o id correspondente no banco de dados.
+
+##### Exemplo de entrada:
+<img alt="imagem-exemplo-de-entrada-correta-get-talker-id" src="/images-readme/get-talker-id-entrada-exemplo.png">
+
+##### Exemplo de saída:
+<img alt="imagem-exemplo-de-saida-correta-get-talker-id" src="/images-readme/get-talker-id-saida-exemplo.png">
+
+#### Inserindo informações incorretas
+Existem um cenário onde a saída acima pode não ser retornada: caso não exista a pessoa palestrante com aquele id.
+
+<strong>Caso não exista a pessoa palestrante com aquele id no banco de dados, o retorno será:</strong>
+```
+{
+  "message": "Pessoa palestrante não encontrada"
+}
+```
+
+</details>
+
 
 <!--
 <details>
@@ -84,69 +107,6 @@ Existem dois cenários onde a saída acima pode não ser retornada: caso não pr
 ```
 {
   "message": "\"password\" is required"
-}
-```
-
-</details>
-
-<details>
-<summary>Endpoint GET /user</summary><br />
-Utilizado para retornar as informações de todos os usuários que contém no banco de dados, porém é necessário ter um token para isso.
-
-##### Exemplo de entrada:
-<img alt="imagem-exemplo-de-entrada-correta-get-user" src="/images-readme/get-user-exemplo-de-entrada.png">
-
-##### Exemplo de saída:
-<img alt="imagem-exemplo-de-saida-correta-get-user" src="/images-readme/get-user-exemplo-de-saida.png">
-
-
-#### Inserindo informações incorretas
-Existem duas formas para o banco de dados não ser acessado. Não contendo um token ou tendo um token inválido.
-
-<strong>Exemplo caso não contenha o token:</strong>
-```
-{
-  "message": "Token not found"
-}
-```
-
-<strong>Exemplo caso o token tenha expirado ou seja inválido:</strong>
-```
-{
-  "message": "Expired or invalid token"
-}
-```
-
-</details>
-
-<details>
-<summary>Endpoint GET /user/:id</summary><br />
-Utilizado para retornar as informações do usuário com o id que está no url que contém no banco de dados, porém é necessário ter um token para isso.
-
-##### Exemplo de entrada:
-<img alt="imagem-exemplo-de-entrada-correta-get-user-id" src="/images-readme/get-user-id-exemplo-de-entrada.png">
-
-##### Exemplo de saída:
-<img alt="imagem-exemplo-de-saida-correta-get-user-id" src="/images-readme/get-user-id-exemplo-resposta.png">
-
-<strong>Caso não exista usuário com aquele id no banco de dados, o retorno será:</strong>
-```
-{
-  "message": "User does not exist"
-}
-```
-
-<strong>Exemplo caso não contenha o token:</strong>
-```
-{
-  "message": "Token not found"
-}
-```
-
-<strong>Exemplo caso o token tenha expirado ou seja inválido:</strong>
-```
-{
-  "message": "Expired or invalid token"
 }
 ```
 
