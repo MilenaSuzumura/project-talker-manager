@@ -10,9 +10,21 @@ Talker Manager é um projeto focado em desenvolver uma API de cadastro e pesquis
 * Express.js;
 * Docker;
 
-<!--
 ## Rotas, entradas e saídas
 
+<details>
+<summary>Endpoint GET /talker</summary><br />
+Utilizado para retornar todos os talkers existentes no banco de dados.
+
+##### Exemplo de entrada:
+<img alt="imagem-exemplo-entrada-get-talker" src="/images-readme/get-talker-entrada-exemplo.png">
+
+##### Exemplo de entrada:
+<img alt="imagem-exemplo-saida-get-talker" src="/images-readme/get-talker-saida-exemplo.png">
+
+</details>
+
+<!--
 <details>
 <summary>Endpoint POST /login</summary><br />
 Utilizado para quando o usuário vai acessar sua conta. O banco de dados exige que o usuário insira o email e senha correta e irá retornar um token temporário como confirmação de que está correto.
