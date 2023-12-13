@@ -59,7 +59,7 @@ Utilizado para quando o usuário vai acessar sua conta. O banco de dados exige q
 
 <details>
 <summary>Endpoint POST /talker</summary><br />
-Utilizado para criar um novo palestrante. Para isso, necessita de um nome, idade, o dia que fez a palestra e avaliação.
+Utilizado para criar um novo palestrante. Para isso, necessita de um nome, idade, o dia que fez a palestra e avaliação. Também precisa de um token valido.
 
 ##### Informações necessárias:
 * <strong>name:</strong> É o nome e sobrenome. Deve ser enviado como string e o mínimo de caracters é 3. É obrigatório.
@@ -75,7 +75,7 @@ Utilizado para criar um novo palestrante. Para isso, necessita de um nome, idade
 <img alt="imagem-exemplo-saída-correta-post-talker" src="/images-readme/post-talker-saida-exemplo.png">
 
 #### Inserindo informações incorretas
-Existem dois cenários onde a saída acima pode não ser retornada: caso não preencha os requisitos necessários(explicados nas Informações Necessárias acima) e caso falte alguma das informações obrigatórias. Cada um deles terá uma mensagem diferente avisando o motivo de estar incorreta.
+Existem quatro cenários onde a saída acima pode não ser retornada: caso não preencha os requisitos necessários(explicados nas Informações Necessárias acima), caso falte alguma das informações obrigatórias, se não tiver um token ou tendo um token inválido. Cada um deles terá uma mensagem diferente avisando o motivo de estar incorreta.
 
 <strong>Exemplos caso não preencha os requisitos necessários:</strong>
 ```
@@ -97,11 +97,25 @@ Existem dois cenários onde a saída acima pode não ser retornada: caso não pr
 }
 ```
 
+<strong>Exemplo caso não contenha o token:</strong>
+```
+{
+  "message": "Token não encontrado"
+}
+```
+
+<strong>Exemplo caso o token tenha expirado ou seja inválido:</strong>
+```
+{
+  "message": "Token inválido"
+}
+```
+
 </details>
 
 <details>
 <summary>Endpoint PUT /talker/:id</summary><br />
-Utilizado para alterar as informações do palestrante com esse id. Para isso, necessita de um nome, idade, o dia que fez a palestra e avaliação, assim como o POST /talker.
+Utilizado para alterar as informações do palestrante com esse id. Para isso, necessita de um nome, idade, o dia que fez a palestra e avaliação, assim como o POST /talker. Também precisa de um token valido.
 
 ##### Informações necessárias:
 * <strong>name:</strong> É o nome e sobrenome. Deve ser enviado como string e o mínimo de caracters é 3. É obrigatório.
@@ -117,7 +131,7 @@ Utilizado para alterar as informações do palestrante com esse id. Para isso, n
 <img alt="imagem-exemplo-saida-correta-put-talker-id" src="/images-readme/put-talker-id-saida-exemplo.png">
 
 #### Inserindo informações incorretas
-Existem dois cenários onde a saída acima pode não ser retornada: caso não preencha os requisitos necessários(explicados nas Informações Necessárias acima) e caso falte alguma das informações obrigatórias. Cada um deles terá uma mensagem diferente avisando o motivo de estar incorreta.
+Existem quatro cenários onde a saída acima pode não ser retornada: caso não preencha os requisitos necessários(explicados nas Informações Necessárias acima), caso falte alguma das informações obrigatórias, se não tiver um token ou tendo um token inválido. Cada um deles terá uma mensagem diferente avisando o motivo de estar incorreta.
 
 <strong>Exemplos caso não preencha os requisitos necessários:</strong>
 ```
@@ -139,157 +153,48 @@ Existem dois cenários onde a saída acima pode não ser retornada: caso não pr
 }
 ```
 
+<strong>Exemplo caso não contenha o token:</strong>
+```
+{
+  "message": "Token não encontrado"
+}
+```
+
+<strong>Exemplo caso o token tenha expirado ou seja inválido:</strong>
+```
+{
+  "message": "Token inválido"
+}
+```
+
+</details>
+
+<details>
+<summary>Endpoint DELETE /talker/:id</summary><br />
+Utilizado para deletar as informações do palestrante com esse id. Para isso, necessita de um token valido.
+
+<strong>OBS:</strong> Não é necessário informações adicionais e nem retornará nada.
+
+#### Inserindo informações incorretas
+Existem dois cenários onde a saída será retornada: se não tiver um token ou tendo um token inválido. Cada um deles terá uma mensagem diferente avisando o motivo de estar incorreta.
+
+<strong>Exemplo caso não contenha o token:</strong>
+```
+{
+  "message": "Token não encontrado"
+}
+```
+
+<strong>Exemplo caso o token tenha expirado ou seja inválido:</strong>
+```
+{
+  "message": "Token inválido"
+}
+```
+
 </details>
 
 <!--
-<details>
-<summary>Endpoint GET /categories</summary><br />
-Utilizado para retornar as informações de todas as categorias que contém no banco de dados, porém é necessário ter um token para isso.
-
-##### Exemplo de entrada:
-<img alt="imagem-exemplo-de-entrada-correta-get-categories" src="/images-readme/get-categories-exemplo-entrada.png">
-
-##### Exemplo de saída:
-<img alt="imagem-exemplo-de-saida-correta-get-categories" src="/images-readme/get-categories-exemplo-saida.png">
-
-#### Inserindo informações incorretas
-Existem dois cenários onde a saída acima pode não ser retornada: caso não tenha o token e um token invalido.
-
-<strong>Exemplo caso não contenha o token:</strong>
-```
-{
-  "message": "Token not found"
-}
-```
-
-<strong>Exemplo caso o token tenha expirado ou seja inválido:</strong>
-```
-{
-  "message": "Expired or invalid token"
-}
-```
-
-</details>
-
-<details>
-<summary>Endpoint POST /post</summary><br />
-Utilizado para criar um novo post. Para isso, necessita de um nome, email, senha e uma imagem. Assim como o login, retornará um token caso todas as informações enviadas foram validadas corretamente.
-
-##### Informações necessárias:
-* <strong>title:</strong> É o título do post e deve ser enviado como string. É obrigatório.
-* <strong>content:</strong> É o conteúdo do post e deve ser enviado como string. É obrigatório.
-* <strong>categoryIds:</strong> É um array de números com as categorias ao qual o post pertence e precisa ter pelo menos 1 id de categoria. É obrigatório.
-
-##### Exemplo de entrada:
-<img alt="imagem-exemplo-de-entrada-correta-post-post" src="/images-readme/post-post-exemplo-entrada.png">
-
-##### Exemplo de saída:
-<img alt="imagem-exemplo-de-saida-correta-post-post" src="/images-readme/post-post-exemplo-saida.png">
-
-#### Inserindo informações incorretas
-Existem dois cenários onde a saída acima pode não ser retornada: caso não preencha os requisitos necessários(explicados nas Informações Necessárias acima) e caso falte alguma das informações obrigatórias. Cada um deles terá uma mensagem diferente avisando o motivo de estar incorreta.
-
-<strong>Exemplo caso não preencha os requisitos necessários:</strong>
-```
-{
-  "message": "Some required fields are missing"
-}
-```
-
-<strong>Exemplo caso esteja faltando alguma das informações obrigatórias</strong>
-```
-{
-  "message": "\"content\" is required"
-}
-```
-
-##### Além disso, pode ter os erros do token.
-
-<strong>Exemplo caso não contenha o token:</strong>
-```
-{
-  "message": "Token not found"
-}
-```
-
-<strong>Exemplo caso o token tenha expirado ou seja inválido:</strong>
-```
-{
-  "message": "Expired or invalid token"
-}
-```
-
-</details>
-
-</details>
-
-<details>
-<summary>Endpoint GET /post</summary><br />
-Utilizado para retornar as informações de todas as postagens que contém no banco de dados, porém é necessário ter um token para isso.
-
-##### Exemplo de entrada:
-<img alt="imagem-exemplo-de-entrada-correta-get-post" src="/images-readme/get-post-exemplo-entrada.png">
-
-##### Exemplo de saída:
-<img alt="imagem-exemplo-de-saida-correta-get-post" src="/images-readme/get-post-exemplo-saida.png">
-
-
-#### Inserindo informações incorretas
-Existem dois cenários onde a saída acima pode não ser retornada: caso não tenha o token e um token invalido.
-
-<strong>Exemplo caso não contenha o token:</strong>
-```
-{
-  "message": "Token not found"
-}
-```
-
-<strong>Exemplo caso o token tenha expirado ou seja inválido:</strong>
-```
-{
-  "message": "Expired or invalid token"
-}
-```
-
-</details>
-
-<details>
-<summary>Endpoint GET /post/:id</summary><br />
-Utilizado para retornar as informações das postagens com o id que está no url que contém no banco de dados, porém é necessário ter um token para isso.
-
-##### Exemplo de entrada:
-<img alt="imagem-exemplo-de-entrada-correta-get-post-id" src="/images-readme/get-post-id-exemplo-entrada.png">
-
-##### Exemplo de saída:
-<img alt="imagem-exemplo-de-saida-correta-get-post-id" src="/images-readme/get-post-id-exemplo-saida.png">
-
-
-#### Inserindo informações incorretas
-Existem três cenários onde a saída acima pode não ser retornada: caso não exista post com aquele id, não tenha o token e um token invalido.
-
-<strong>Caso não exista post com aquele no banco de dados, o retorno será:</strong>
-```
-{
-  "message": "Post does not exist"
-}
-```
-
-<strong>Exemplo caso não contenha o token:</strong>
-```
-{
-  "message": "Token not found"
-}
-```
-
-<strong>Exemplo caso o token tenha expirado ou seja inválido:</strong>
-```
-{
-  "message": "Expired or invalid token"
-}
-```
-
-</details>
-
 <strong>OBS:</strong> Existe o Endpoint GET /search, porém não funciona.
 
 ## Utilizando o docker
