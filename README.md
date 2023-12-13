@@ -66,7 +66,7 @@ Utilizado para criar um novo palestrante. Para isso, necessita de um nome, idade
 * <strong>age:</strong> É a idade do palestrante. Deve ser enviado como int e o palestrante precisa ter, no mínimo, 18 anos. É obrigatório.
 * <strong>talk:</strong> É um objeto com informações da palestra. Dentro dele, deve conter o dia assistido e a avaliação. É obrigatório.
 * <strong>watchedAt:</strong> É o dia em que foi assistido a palestra. Essa informação deve estar no objeto talk e deve ser enviado como string contendo a data completa em formato dia/mês/ano. É obrigatório. 
-* <strong>rate:</strong> É a avaliação da palestra. Essa informação deve estar no objeto talk e deve ser enviado como int. É obrigatório. 
+* <strong>rate:</strong> É a avaliação da palestra. Essa informação deve estar no objeto talk e deve ser enviado como int com um número de 1 à 5. É obrigatório. 
 
 ##### Exemplo de entrada:
 <img alt="imagem-exemplo-entrada-correta-post-talker" src="/images-readme/post-talker-entrada-exemplo.png">
@@ -99,50 +99,49 @@ Existem dois cenários onde a saída acima pode não ser retornada: caso não pr
 
 </details>
 
-<!--
 <details>
-<summary>Endpoint POST /categories</summary><br />
-Utilizado para criar uma nova categoria. Para isso, necessita de um nome e de um token valido. Caso as informações estejam corretas, retornara as informações da nova categoria.
+<summary>Endpoint PUT /talker/:id</summary><br />
+Utilizado para alterar as informações do palestrante com esse id. Para isso, necessita de um nome, idade, o dia que fez a palestra e avaliação, assim como o POST /talker.
+
+##### Informações necessárias:
+* <strong>name:</strong> É o nome e sobrenome. Deve ser enviado como string e o mínimo de caracters é 3. É obrigatório.
+* <strong>age:</strong> É a idade do palestrante. Deve ser enviado como int e o palestrante precisa ter, no mínimo, 18 anos. É obrigatório.
+* <strong>talk:</strong> É um objeto com informações da palestra. Dentro dele, deve conter o dia assistido e a avaliação. É obrigatório.
+* <strong>watchedAt:</strong> É o dia em que foi assistido a palestra. Essa informação deve estar no objeto talk e deve ser enviado como string contendo a data completa em formato dia/mês/ano. É obrigatório. 
+* <strong>rate:</strong> É a avaliação da palestra. Essa informação deve estar no objeto talk e deve ser enviado como int com um número de 1 à 5. É obrigatório. 
 
 ##### Exemplo de entrada:
-<img alt="imagem-exemplo-de-entrada-correta-post-categories" src="/images-readme/post-categories-exemplo-entrada.png">
+<img alt="imagem-exemplo-entrada-correta-put-talker-id" src="/images-readme/put-talker-id-entrada-exemplo.png">
 
 ##### Exemplo de saída:
-<img alt="imagem-exemplo-de-saida-correta-post-categories" src="/images-readme/post-categories-exemplo-saida.png">
+<img alt="imagem-exemplo-saida-correta-put-talker-id" src="/images-readme/put-talker-id-saida-exemplo.png">
 
 #### Inserindo informações incorretas
-Existem quatro cenários onde a saída acima pode não ser retornada: não conter o nome da categoria, a string name estar vazia, caso não tenha o token e um token invalido.
+Existem dois cenários onde a saída acima pode não ser retornada: caso não preencha os requisitos necessários(explicados nas Informações Necessárias acima) e caso falte alguma das informações obrigatórias. Cada um deles terá uma mensagem diferente avisando o motivo de estar incorreta.
 
-<strong>Exemplo caso não contenha o name:</strong>
+<strong>Exemplos caso não preencha os requisitos necessários:</strong>
 ```
 {
-  "message": "\"name\" is required"
+  "message": "A pessoa palestrante deve ser maior de idade"
 }
 ```
 
-<strong>Exemplo caso name seja uma string vazia:</strong>
 ```
 {
-  "message": "\"name\" is not allowed to be empty"
+  "message": "O \"name\" deve ter pelo menos 3 caracteres"
 }
 ```
 
-<strong>Exemplo caso não contenha o token:</strong>
+<strong>Exemplo caso esteja faltando alguma das informações obrigatórias</strong>
 ```
 {
-  "message": "Token not found"
-}
-```
-
-<strong>Exemplo caso o token tenha expirado ou seja inválido:</strong>
-```
-{
-  "message": "Expired or invalid token"
+  "message": "O campo \"age\" é obrigatório"
 }
 ```
 
 </details>
 
+<!--
 <details>
 <summary>Endpoint GET /categories</summary><br />
 Utilizado para retornar as informações de todas as categorias que contém no banco de dados, porém é necessário ter um token para isso.
