@@ -4,23 +4,13 @@ Talker Manager é um projeto focado em desenvolver uma API de cadastro e pesquis
 
 <strong>OBS:</strong> ESSE PROJETO FOI DESENVOLVIDO NA TRYBE.
 
-<!--
 ## Técnologias usadas
 * JavaScript;
 * Node.js;
 * Express.js;
-* Sequelize.js;
-* Json web tokens;
-* DotEnv;
-* Joi;
 * Docker;
-* MySQL;
-* Jest;
-* Mock;
-* Sinon;
-* Chai;
-* Chai-http.
 
+<!--
 ## Rotas, entradas e saídas
 
 <details>
