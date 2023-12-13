@@ -29,10 +29,10 @@ Utilizado para retornar todos os palestrantes existentes no banco de dados.
 Utilizado para retornar o palestrante com o id correspondente no banco de dados.
 
 ##### Exemplo de entrada:
-<img alt="imagem-exemplo-de-entrada-correta-get-talker-id" src="/images-readme/get-talker-id-entrada-exemplo.png">
+<img alt="imagem-exemplo-entrada-correta-get-talker-id" src="/images-readme/get-talker-id-entrada-exemplo.png">
 
 ##### Exemplo de saída:
-<img alt="imagem-exemplo-de-saida-correta-get-talker-id" src="/images-readme/get-talker-id-saida-exemplo.png">
+<img alt="imagem-exemplo-saida-correta-get-talker-id" src="/images-readme/get-talker-id-saida-exemplo.png">
 
 #### Inserindo informações incorretas
 Existem um cenário onde a saída acima pode não ser retornada: caso não exista a pessoa palestrante com aquele id.
@@ -44,6 +44,17 @@ Existem um cenário onde a saída acima pode não ser retornada: caso não exist
 }
 ```
 
+</details>
+
+<details>
+<summary>Endpoint POST /login</summary><br />
+Utilizado para quando o usuário vai acessar sua conta. O banco de dados exige que o usuário insira o email e senha correta e irá retornar um token temporário como confirmação de que está correto.
+
+##### Exemplo de entrada:
+<img alt="imagem-exemplo-entrada-correta-post-login" src="/images-readme/post-login-entrada-exemplo.png">
+
+##### Exemplo de saída:
+<img alt="imagem-exemplo-saída-correta-post-login" src="/images-readme/post-login-saida-exemplo.png">
 </details>
 
 <details>
