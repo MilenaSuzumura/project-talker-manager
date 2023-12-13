@@ -8,6 +8,23 @@ const router = express.Router();
 
 const responseTalker = require('./responseTalker.js');
 
+const {
+  validaName, validaIdade, validaTalk, validaRate, validaWatchedAt,
+  validaAutorizacao,
+} = require('./validator');
+
+router.get('/search', validaAutorizacao, async (req, res) => {
+  const { q } = req.query;
+  const response = await responseTalker();
+
+  if (!q) {
+    res.status(200).json(response);
+  }
+  
+  const talkers = response.filter((item) => item.name.includes(q));
+  res.status(200).json(talkers);
+});
+
 router.get('/', async (_req, res) => {
   const response = await responseTalker();
     if (response.length === 0) {
@@ -30,11 +47,6 @@ router.get('/:id', async (req, res) => {
     res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
   }
 });
-
-const {
-    validaName, validaIdade, validaTalk, validaRate, validaWatchedAt,
-    validaAutorizacao,
-} = require('./validator');
 
 router.post('/', validaAutorizacao,
 validaName, validaIdade, validaTalk, validaRate, validaWatchedAt, async (req, res) => {
