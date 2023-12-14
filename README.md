@@ -275,3 +275,5 @@ Para rodar um teste específico:
 
 exemplo:
 `npm test 1`
+
+<strong>OBS:</strong> OS TESTES FORAM DESENVOLVIDOS PELA TRYBE.
