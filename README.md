@@ -10,6 +10,7 @@ Talker Manager é um projeto focado em desenvolver uma API de cadastro e pesquis
 * Express.js;
 * Docker;
 * Higher Order Functions(HOF);
+* Nodemon;
 
 ## Rotas, entradas e saídas
 
