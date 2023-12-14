@@ -251,25 +251,16 @@ Existem dois cenários onde a saída será retornada: se não tiver um token ou 
 
 </details>
 
-<!--
-<strong>OBS:</strong> Existe o Endpoint GET /search, porém não funciona.
-
 ## Utilizando o docker
 Para criar os containers, execute: `docker-compose up -d`
 
-Para abrir o terminar do container, execute: `docker exec -it blogs_api bash`
+Para abrir o terminar do container, execute: `docker exec -it talker_manager bash`
 
 ## Instalando Dependências
   `npm install`
 
-## Banco de dados
-Para criar o banco de dados, execute: `npm run prestart`
-
-Para popular o banco de dados: `npm run seed`
-
 ## Aplicação Node:
-Para executar a aplicação e acessar as rotas, execute: `npm run debug`
-
+Para executar a aplicação e acessar as rotas, execute: `npm start` ou `npm run dev`
 
 ## Executando Testes
 Para rodar todos os testes:
@@ -279,11 +270,8 @@ Para rodar todos os testes:
 
 Para rodar um teste específico:
 
-  `npm test nomeDoArquivo`
+  `npm test númeroDoTest`
+
 
 exemplo:
-`npm test post`
-
-
-
-<strong>OBS:</strong> Os testes irão rodar com os testes de cobertura -->
+`npm test 1`
