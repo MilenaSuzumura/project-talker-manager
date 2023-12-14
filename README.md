@@ -9,6 +9,7 @@ Talker Manager é um projeto focado em desenvolver uma API de cadastro e pesquis
 * Node.js;
 * Express.js;
 * Docker;
+* Higher Order Functions(HOF);
 
 ## Rotas, entradas e saídas
 
@@ -174,6 +175,62 @@ Existem quatro cenários onde a saída acima pode não ser retornada: caso não 
 Utilizado para deletar as informações do palestrante com esse id. Para isso, necessita de um token valido.
 
 <strong>OBS:</strong> Não é necessário informações adicionais e nem retornará nada.
+
+#### Inserindo informações incorretas
+Existem dois cenários onde a saída será retornada: se não tiver um token ou tendo um token inválido. Cada um deles terá uma mensagem diferente avisando o motivo de estar incorreta.
+
+<strong>Exemplo caso não contenha o token:</strong>
+```
+{
+  "message": "Token não encontrado"
+}
+```
+
+<strong>Exemplo caso o token tenha expirado ou seja inválido:</strong>
+```
+{
+  "message": "Token inválido"
+}
+```
+
+</details>
+
+<details>
+<summary>Endpoint GET /talker/search</summary><br />
+Utilizado para para pesquisar o nome do palestrante. Para isso, necessita, caso o usuario queira, um nome, e de um token valido. Caso não seja mandado nenhum query, será retornado todos os palestrantes. E se for mandado um query e não tenha esse palestrante, será enviado um array vazio.
+
+<details>
+<summary>Nome que existe no banco de dados</summary><br />
+
+##### Exemplo de entrada:
+<img alt="imagem-exemplo-entrada-correta-get-talker-search-Henrique" src="/images-readme/get-talker-search-name-Henrique-entrada-exemplo.png">
+
+##### Exemplo de saída:
+<img alt="imagem-exemplo-saida-correta-get-talker-search-Henrique" src="/images-readme/get-talker-search-name-Henrique-saida-exemplo.png">
+
+</details>
+
+<details>
+<summary>Nome que não existe no banco de dados</summary><br />
+
+##### Exemplo de entrada:
+<img alt="imagem-exemplo-entrada-correta-get-talker-search-Emanoela" src="/images-readme/get-talker-search-name-Emanoela-entrada-exemplo.png">
+
+##### Exemplo de saída:
+<img alt="imagem-exemplo-saida-correta-get-talker-search-Emanoela" src="/images-readme/get-talker-search-name-Emanoela-saida-exemplo.png">
+
+</details>
+
+<details>
+<summary>Sem nomes na pesquisa</summary><br />
+
+##### Exemplo de entrada:
+<img alt="imagem-exemplo-entrada-correta-get-talker-search" src="/images-readme/get-talker-search-entrada-exemplo.png">
+
+##### Exemplo de saída:
+<img alt="imagem-exemplo-saida-correta-get-talker-search" src="/images-readme/get-talker-search-saida-exemplo.png">
+
+</details>
 
 #### Inserindo informações incorretas
 Existem dois cenários onde a saída será retornada: se não tiver um token ou tendo um token inválido. Cada um deles terá uma mensagem diferente avisando o motivo de estar incorreta.
